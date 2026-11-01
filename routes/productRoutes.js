@@ -24,3 +24,4 @@ router.patch('/products/:id', productController.patchProduct);
 router.delete('/products/:id', productController.deleteProduct);
 
 export default router;
+

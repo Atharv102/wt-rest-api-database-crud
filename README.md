@@ -152,3 +152,4 @@ http://localhost:3000
 - **Atharv Jadhav:** `practical 6-202401100102.pdf` / `InventoryHub_WT_Practical_Report.pdf` (PRN: `202401100102`, Div: `B`)
 - **Chaitanya Umbarkar:** `InventoryHub_WT_Practical_Report_Chaitanya_Umbarkar.pdf` (PRN: `202401100080`, Div: `B`)
 - **Format:** Strict 10-page academic structure matching MIT AOE guidelines, ending cleanly after Section 13 Conclusion with NO signature block.
+
