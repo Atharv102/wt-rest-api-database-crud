@@ -1,0 +1,30 @@
+{
+  "name": "inventoryhub-rest-api-crud",
+  "version": "1.0.0",
+  "description": "Enterprise RESTful API for Database CRUD operations with Postman testing and cloud deployment",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test/api.test.js",
+    "screenshots": "node capture-screenshots.js"
+  },
+  "keywords": [
+    "restful-api",
+    "crud-operations",
+    "database",
+    "postman",
+    "expressjs",
+    "web-technology",
+    "practical-6"
+  ],
+  "author": "Atharv Jadhav",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^23.6.0"
+  }
+}

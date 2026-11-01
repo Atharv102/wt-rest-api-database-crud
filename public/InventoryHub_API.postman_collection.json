@@ -1,0 +1,185 @@
+{
+  "info": {
+    "_postman_id": "a8f3b9c1-4277-4c48-8df0-e374528c11aa",
+    "name": "InventoryHub RESTful API — Database CRUD Operations",
+    "description": "Comprehensive Postman test suite for Web Technology Practical 6: Create, Read, Update, Delete records in a database with input validation and HTTP status codes.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api",
+      "type": "string"
+    },
+    {
+      "key": "createdProductId",
+      "value": "PROD-1001",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. GET All Products (Read Collection)",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/products",
+          "host": ["{{baseUrl}}"],
+          "path": ["products"]
+        },
+        "description": "Retrieves all products from the database with pagination, sorting, and category filters."
+      },
+      "response": []
+    },
+    {
+      "name": "2. GET Product by ID (Read Single Record)",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/products/PROD-1001",
+          "host": ["{{baseUrl}}"],
+          "path": ["products", "PROD-1001"]
+        },
+        "description": "Retrieves a single product record by its primary key ID."
+      },
+      "response": []
+    },
+    {
+      "name": "3. POST Create Product (Create Record - 201 Created)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"sku\": \"TECH-KEYCHRON-Q1\",\n  \"name\": \"Keychron Q1 Pro Wireless Custom Mechanical Keyboard\",\n  \"category\": \"Peripherals\",\n  \"quantity\": 35,\n  \"unitPrice\": 199.50,\n  \"supplier\": \"Keychron Direct Asia\",\n  \"reorderThreshold\": 10\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/products",
+          "host": ["{{baseUrl}}"],
+          "path": ["products"]
+        },
+        "description": "Inserts a new product record into the database after validating constraints."
+      },
+      "response": []
+    },
+    {
+      "name": "4. PUT Update Product (Full Update - 200 OK)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"sku\": \"TECH-LOGI-MX3S-V2\",\n  \"name\": \"Logitech MX Master 3S Wireless Mouse (Graphite Black)\",\n  \"category\": \"Peripherals\",\n  \"quantity\": 120,\n  \"unitPrice\": 94.99,\n  \"supplier\": \"Logitech Asia Pacific Distribution\",\n  \"reorderThreshold\": 25\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/products/PROD-1002",
+          "host": ["{{baseUrl}}"],
+          "path": ["products", "PROD-1002"]
+        },
+        "description": "Completely updates an existing product record in the database."
+      },
+      "response": []
+    },
+    {
+      "name": "5. PATCH Partial Update (Stock Adjustment - 200 OK)",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"quantity\": 15,\n  \"unitPrice\": 599.00\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/products/PROD-1003",
+          "host": ["{{baseUrl}}"],
+          "path": ["products", "PROD-1003"]
+        },
+        "description": "Partially updates specific attributes of a product record without overwriting other fields."
+      },
+      "response": []
+    },
+    {
+      "name": "6. DELETE Product (Delete Record - 200 OK)",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/products/PROD-1006",
+          "host": ["{{baseUrl}}"],
+          "path": ["products", "PROD-1006"]
+        },
+        "description": "Permanently deletes a product record from the warehouse database."
+      },
+      "response": []
+    },
+    {
+      "name": "7. GET Non-Existent Record (Verify 404 Not Found)",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/products/PROD-NONEXISTENT",
+          "host": ["{{baseUrl}}"],
+          "path": ["products", "PROD-NONEXISTENT"]
+        },
+        "description": "Tests error response handling when attempting to retrieve an invalid product ID."
+      },
+      "response": []
+    },
+    {
+      "name": "8. POST Duplicate SKU Validation (Verify 409 Conflict)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"sku\": \"TECH-MBP-14\",\n  \"name\": \"Duplicate MacBook Record\",\n  \"category\": \"Laptops & Computers\",\n  \"quantity\": 10,\n  \"unitPrice\": 1999.00,\n  \"supplier\": \"Third Party Reseller\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/products",
+          "host": ["{{baseUrl}}"],
+          "path": ["products"]
+        },
+        "description": "Verifies that the database rejects duplicate SKU conflicts with HTTP 409 Conflict."
+      },
+      "response": []
+    },
+    {
+      "name": "9. GET Inventory Analytics Summary (Aggregate Metrics)",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/products/stats/summary",
+          "host": ["{{baseUrl}}"],
+          "path": ["products", "stats", "summary"]
+        },
+        "description": "Computes total inventory valuation, out of stock counts, and category aggregations."
+      },
+      "response": []
+    }
+  ]
+}
